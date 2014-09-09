@@ -33,7 +33,7 @@ docs/_build
 
 # Virtual environments
 env
-env*
+venv
 
 .webassets-cache
 *.sublime-*
