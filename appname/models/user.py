@@ -32,7 +32,7 @@ class User(db.Model, ActiveModel, UserMixin):
     @classmethod
     def authenticate(cls, username, password):
         user = User.query.filter_by(username=username).first()
-        return user if check_password_hash(user.password, password) else None
+        return user if user and check_password_hash(user.password, password) else None
     
     def __repr__(self):
         return '<User %r>' % self.username
