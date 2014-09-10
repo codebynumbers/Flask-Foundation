@@ -6,10 +6,12 @@ class User(db.Model, ActiveModel, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True)
     password = db.Column(db.String)
+    active = db.Column(db.Boolean(), default=True, server_default='1')
 
     def __init__(self, username, password):
         self.username = username
         self.password = generate_password_hash(password)
+        self.active = True
 
     def is_authenticated(self):
         if isinstance(self, AnonymousUserMixin):
@@ -18,7 +20,7 @@ class User(db.Model, ActiveModel, UserMixin):
             return True
 
     def is_active(self):
-        return True
+        return self.active
 
     def is_anonymous(self):
         if isinstance(self, AnonymousUserMixin):
