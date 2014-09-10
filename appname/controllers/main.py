@@ -20,8 +20,7 @@ def login():
     if form.validate_on_submit():
         user = User.authenticate(username=form.username.data,
                                  password=form.password.data)
-        if user:
-            login_user(user)
+        if user and login_user(user)
             flash("Logged in successfully.", "success")
             return redirect(request.args.get("next") or url_for(".home"))
         else:
