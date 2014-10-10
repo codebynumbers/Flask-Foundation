@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
 from appname import cache
-from appname.forms import LoginForm, SignupForm
+from appname.forms import LoginForm, SignupForm, ChangePasswordForm
 from appname.models import User
 
 main = Blueprint('main', __name__)
@@ -28,6 +28,23 @@ def login():
 
     return render_template("login.html", form=form)
 
+@main.route("/changepass", methods=["GET", "POST"])
+@login_required
+def change_password():
+    form = ChangePasswordForm()
+    if request.method == "GET":
+        return render_template("change_password.html", form=form)
+
+    # Re-validate old password
+    if form.validate_on_submit() and User.authenticate(
+            current_user.username, form.current_password.data):
+        current_user.update_password(form.password.data)
+        current_user.save()
+        flash("Password change successfully.", "success")
+        return redirect(url_for(".home"))
+    else:
+        flash("Password change failed.", "danger")
+        return render_template("change_password.html", form=form)
 
 @main.route("/logout")
 def logout():

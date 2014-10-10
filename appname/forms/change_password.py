@@ -3,10 +3,10 @@ from wtforms import TextField, PasswordField
 from wtforms import validators
 
 
-class SignupForm(Form):
-    username = TextField(u'Email', 
+class ChangePasswordForm(Form):
+    current_password = PasswordField(u'Current Password', 
     	validators=[validators.required()])
-    password = PasswordField(u'Password', 
+    password = PasswordField(u'New Password', 
     	validators=[validators.required(), validators.Length(min=8)])
-    password_confirm = PasswordField(u'Repeat Password', 
+    password_confirm = PasswordField(u'Repeat New Password', 
     	validators=[validators.required(), validators.EqualTo('password')])

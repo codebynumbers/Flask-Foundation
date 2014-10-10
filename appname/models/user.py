@@ -31,6 +31,9 @@ class User(db.Model, ActiveModel, UserMixin):
     def get_id(self):
         return self.id
 
+    def update_password(self, password):
+        self.password = generate_password_hash(password)
+        
     @classmethod
     def authenticate(cls, username, password):
         user = User.query.filter_by(username=username).first()
