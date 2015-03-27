@@ -31,5 +31,5 @@ test:
 
 rename:
 	echo "renaming appname to $(appname)"
-	find . -type f | grep -v '/env/' | xargs replace appname $(appname)
+	find . -type f | grep -v '/env/' | xargs replace appname $(appname) -- {}
 	mv appname $(appname)
