@@ -37,3 +37,6 @@ venv
 
 .webassets-cache
 *.sublime-*
+
+.idea
+*.iml
