@@ -1,7 +1,8 @@
 #! ../env/bin/python
 import os
-
-from flask import Flask
+import sys
+import logging
+from fifty.flask.app import Flask
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from appname import assets
@@ -11,36 +12,46 @@ from appname.extensions import (
     cache,
     assets_env,
     debug_toolbar,
-    login_manager
+    login_manager,
+    migrate
 )
 
 
-def create_app(object_name, env="prod"):
+def create_app(config='', **config_kwargs):
     """
     An flask application factory, as explained here:
     http://flask.pocoo.org/docs/patterns/appfactories/
 
     Arguments:
-        object_name: the python path of the config object,
-                     e.g. appname.settings.ProdConfig
+        config: the path of config file
+        config_kwargs: overrides
 
-        env: The name of the current environment, e.g. prod or dev
+    Default config read from appname/config_default.py
+    See FiftyFlask docs
     """
 
     app = Flask(__name__)
+    app = Flask(__name__)
+    config = config if os.path.isfile(config) else None
+    app.configure(config, **config_kwargs)
 
-    app.config.from_object(object_name)
-    app.config['ENV'] = env
-
-    #init the cache
+    # Cache
     cache.init_app(app)
 
+    # Logging
+    app.logger.addHandler(logging.StreamHandler(sys.stderr))
+
+    # Debug toolbar
     debug_toolbar.init_app(app)
 
-    #init SQLAlchemy
+    # SQLAlchemy
     db.init_app(app)
 
+    # Flask Login
     login_manager.init_app(app)
+
+    # Alembic
+    migrate.init_app(app, db)
 
     # Import and register the different asset bundles
     assets_env.init_app(app)
@@ -48,16 +59,16 @@ def create_app(object_name, env="prod"):
     for name, bundle in assets_loader.load_bundles().iteritems():
         assets_env.register(name, bundle)
 
-    # register our blueprints
+    # Register our blueprints
     from controllers.main import main
     app.register_blueprint(main)
+
+    # Jinja extensions
+    app.jinja_env.add_extension('jinja2.ext.do')
+    app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     return app
 
 if __name__ == '__main__':
-    # Import the config for the proper environment using the
-    # shell var APPNAME_ENV
-    env = os.environ.get('APPNAME_ENV', 'prod')
-    app = create_app('appname.settings.%sConfig' % env.capitalize(), env=env)
-
+    app = create_app()
     app.run()
