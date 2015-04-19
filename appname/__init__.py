@@ -31,7 +31,6 @@ def create_app(config='', **config_kwargs):
     """
 
     app = Flask(__name__)
-    app = Flask(__name__)
     config = config if os.path.isfile(config) else None
     app.configure(config, **config_kwargs)
 

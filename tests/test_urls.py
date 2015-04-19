@@ -6,7 +6,8 @@ from appname.models import db
 
 class TestURLs:
     def setup(self):
-        app = create_app('appname.settings.DevConfig', env='dev')
+        app = create_app(TESTING=True)
+        app.login_manager._login_disabled = False
         self.app = app.test_client()
         db.app = app
         db.create_all()

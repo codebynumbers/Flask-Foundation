@@ -6,7 +6,7 @@ from flask.ext.bcrypt import check_password_hash
 
 class TestModels:
     def setup(self):
-        app = create_app('appname.settings.DevConfig', env='dev')
+        app = create_app(TESTING=True)
         self.app = app.test_client()
         db.app = app
         db.create_all()

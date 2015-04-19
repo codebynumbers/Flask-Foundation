@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for
-from flask.ext.login import login_user, logout_user, login_required, current_user
+from flask_login import login_user, logout_user, login_required, current_user
 
 from appname import cache
 from appname.forms import LoginForm, SignupForm, ChangePasswordForm
