@@ -1,4 +1,5 @@
 #! ../env/bin/python
+from fifty.tables import FiftyTables
 import os
 import sys
 import logging
@@ -49,6 +50,9 @@ def create_app(config='', **config_kwargs):
     # Flask Login
     login_manager.init_app(app)
 
+    # FiftyTables
+    FiftyTables(app)
+
     # Alembic
     migrate.init_app(app, db)
 
@@ -59,8 +63,9 @@ def create_app(config='', **config_kwargs):
         assets_env.register(name, bundle)
 
     # Register our blueprints
-    from controllers.main import main
-    app.register_blueprint(main)
+    from controllers import main, widgets
+    app.register_blueprint(main.main_bp)
+    app.register_blueprint(widgets.widgets_bp)
 
     # Jinja extensions
     app.jinja_env.add_extension('jinja2.ext.do')

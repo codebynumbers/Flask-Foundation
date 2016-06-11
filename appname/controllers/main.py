@@ -5,16 +5,21 @@ from appname import cache
 from appname.forms import LoginForm, SignupForm, ChangePasswordForm
 from appname.models import User
 
-main = Blueprint('main', __name__)
+main_bp = Blueprint('main', __name__)
 
 
-@main.route('/')
+@main_bp.route('/')
 @cache.cached(timeout=1000)
 def home():
     return render_template('index.html')
 
 
-@main.route("/login", methods=["GET", "POST"])
+@main_bp.route('/health/')
+def health():
+    return "OK"
+
+
+@main_bp.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
     if form.validate_on_submit():
@@ -29,7 +34,7 @@ def login():
     return render_template("login.html", form=form)
 
 
-@main.route("/changepass", methods=["GET", "POST"])
+@main_bp.route("/changepass", methods=["GET", "POST"])
 @login_required
 def change_password():
     form = ChangePasswordForm()
@@ -48,14 +53,14 @@ def change_password():
         return render_template("change_password.html", form=form)
 
 
-@main.route("/logout")
+@main_bp.route("/logout")
 def logout():
     logout_user()
     flash("You have been logged out.", "success")
     return redirect(url_for(".home"))
 
 
-@main.route("/signup", methods=["GET", "POST"])
+@main_bp.route("/signup", methods=["GET", "POST"])
 def signup():
     form = SignupForm()
     if form.validate_on_submit():
@@ -73,9 +78,3 @@ def signup():
             flash("Account creation failed.", "danger")
 
     return render_template("signup.html", form=form)
-
-
-@main.route("/restricted")
-@login_required
-def restricted():
-    return "You, {}, can only see this if you are logged in!".format(current_user.username), 200

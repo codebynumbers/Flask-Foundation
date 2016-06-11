@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Widgets{% endblock %}
+
+{% block body %}
+<h3>Widgets <a class="pull-right btn btn-primary" href="{{ url_for('widgets.edit') }}">Add New</a></h3>
+
+{%- if table -%}
+{{ table.render_table()|safe }}
+{%- endif -%}
+
+{% endblock %}
+
+{% block js %}
+<script>
+$(function(){
+    $("[data-fifty-table][data-auto-init]").pjaxTable({});
+});
+</script>
+{% endblock %}
