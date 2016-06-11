@@ -1,19 +1,11 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
-from appname import create_app
 from appname.models import db, User
-from flask.ext.bcrypt import check_password_hash
+from flask_bcrypt import check_password_hash
+from tests import BaseTest
 
-class TestModels:
-    def setup(self):
-        app = create_app(TESTING=True)
-        self.app = app.test_client()
-        db.app = app
-        db.create_all()
 
-    def teardown(self):
-        db.session.remove()
-        db.drop_all()
+class TestModels(BaseTest):
 
     def test_user(self):
         admin = User('admin', 'supersafepassword')

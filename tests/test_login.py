@@ -1,22 +1,15 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
-from appname import create_app
 from appname.models import db, User
+from tests import BaseTest
 
 
-class TestForm:
-    def setup(self):
-        app = create_app(TESTING=True)
-        self.app = app.test_client()
-        db.app = app
-        db.create_all()
+class TestForm(BaseTest):
+
+    def create_fixtures(self):
         admin = User('admin', 'supersafepassword')
         db.session.add(admin)
         db.session.commit()
-
-    def teardown(self):
-        db.session.remove()
-        db.drop_all()
 
     def test_user_login(self):
         rv = self.app.post('/login', data=dict(

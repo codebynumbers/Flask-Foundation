@@ -1,6 +1,7 @@
 from .db import db, ActiveModel
-from flask.ext.login import UserMixin, AnonymousUserMixin
-from flask.ext.bcrypt import check_password_hash, generate_password_hash
+from flask_login import UserMixin, AnonymousUserMixin
+from flask_bcrypt import check_password_hash, generate_password_hash
+
 
 class User(db.Model, ActiveModel, UserMixin):
     id = db.Column(db.Integer, primary_key=True)

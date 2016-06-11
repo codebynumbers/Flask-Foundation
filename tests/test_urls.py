@@ -1,20 +1,9 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
-from appname import create_app
-from appname.models import db
+from tests import BaseTest
 
 
-class TestURLs:
-    def setup(self):
-        app = create_app(TESTING=True)
-        app.login_manager._login_disabled = False
-        self.app = app.test_client()
-        db.app = app
-        db.create_all()
-
-    def teardown(self):
-        db.session.remove()
-        db.drop_all()
+class TestURLs(BaseTest):
 
     def test_home(self):
         rv = self.app.get('/')

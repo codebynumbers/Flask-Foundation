@@ -28,6 +28,7 @@ def login():
 
     return render_template("login.html", form=form)
 
+
 @main.route("/changepass", methods=["GET", "POST"])
 @login_required
 def change_password():
@@ -46,11 +47,13 @@ def change_password():
         flash("Password change failed.", "danger")
         return render_template("change_password.html", form=form)
 
+
 @main.route("/logout")
 def logout():
     logout_user()
     flash("You have been logged out.", "success")
     return redirect(url_for(".home"))
+
 
 @main.route("/signup", methods=["GET", "POST"])
 def signup():
