@@ -3,18 +3,22 @@ from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
 from flask_assets import Environment
 from flask_migrate import Migrate
+
 from appname.models import User
 
 # Setup flask cache
 cache = Cache()
 
-# init flask assets
+# Init flask assets
 assets_env = Environment()
 
+# Debug Toolbar
 debug_toolbar = DebugToolbarExtension()
 
+# Alembic
 migrate = Migrate()
 
+# Flask Login
 login_manager = LoginManager()
 login_manager.login_view = "main.login"
 

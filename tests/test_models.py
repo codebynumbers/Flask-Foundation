@@ -1,7 +1,8 @@
 #! ../env/bin/python
 # -*- coding: utf-8 -*-
-from appname.models import db, User
 from flask_bcrypt import check_password_hash
+
+from appname.models import db, User
 from tests import BaseTest
 
 

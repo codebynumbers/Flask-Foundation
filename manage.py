@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-import os
 from flask_migrate import MigrateCommand
-from flask.ext.script import Manager, Server
+from flask_script import Manager, Server
+
 from appname import create_app
 from appname.models import db, User
 
@@ -17,7 +17,6 @@ def make_shell_context():
     """ Creates a python REPL with several default imports
         in the context of the app
     """
-
     return dict(app=app, db=db, User=User)
 
 

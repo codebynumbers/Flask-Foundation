@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, flash, request, redirect, url_for
 from flask_login import login_user, logout_user, login_required, current_user
+from sqlalchemy.exc import SQLAlchemyError
 
 from appname import cache
 from appname.forms import LoginForm, SignupForm, ChangePasswordForm
@@ -67,7 +68,7 @@ def signup():
         try:
             user = User(username=form.username.data,
                         password=form.password.data).save()
-        except:
+        except SQLAlchemyError:
             user = None
             
         if user:

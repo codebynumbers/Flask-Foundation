@@ -1,9 +1,10 @@
-from .db import db, ActiveModel
 from flask_login import UserMixin, AnonymousUserMixin
 from flask_bcrypt import check_password_hash, generate_password_hash
 
+from .db import db, ActiveModel
 
-class User(db.Model, ActiveModel, UserMixin):
+
+class User(UserMixin, ActiveModel, db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)

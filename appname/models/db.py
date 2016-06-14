@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 def full_commit():
     """
     A convenience function for executing a transaction with automatic
@@ -12,6 +13,7 @@ def full_commit():
     except:
         db.session.rollback()
         raise
+
 
 class ActiveModel(object):
     """
