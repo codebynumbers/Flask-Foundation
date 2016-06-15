@@ -11,4 +11,6 @@ SQLALCHEMY_POOL_RECYCLE = 3600
 SQLALCHEMY_COMMIT_ON_TEARDOWN = True
 SQLALCHEMY_ECHO = True
 SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/appname.db'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 #SQLALCHEMY_DATABASE_URI = 'mysql://appname:appname@localhost:3306/appname?charset=utf8'
+

@@ -37,14 +37,14 @@
             <div class="collapse navbar-collapse">
                 <div class="navbar-header">
                     <ul class="nav navbar-nav">
-                        {% if current_user.is_authenticated() %}
+                        {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('widgets.list') }}">Widgets</a></li>
                         {% endif %}
                     </ul>
                 </div>
                 <div class="collapse navbar-collapse user-nav pull-right">
                     <ul class="nav navbar-nav">
-                        {% if current_user.is_authenticated() %}
+                        {% if current_user.is_authenticated %}
                         <li><a href="{{ url_for('main.logout') }}">Logout</a></li>
                         <li><a href="{{ url_for('main.change_password') }}">Change Password</a></li>
                         {% else %}

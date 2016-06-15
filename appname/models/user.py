@@ -17,15 +17,18 @@ class User(UserMixin, ActiveModel, db.Model):
         self.password = generate_password_hash(password)
         self.active = True
 
+    @property
     def is_authenticated(self):
         if isinstance(self, AnonymousUserMixin):
             return False
         else:
             return True
 
+    @property
     def is_active(self):
         return self.active
 
+    @property
     def is_anonymous(self):
         if isinstance(self, AnonymousUserMixin):
             return True
