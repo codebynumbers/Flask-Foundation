@@ -10,7 +10,7 @@ A Fork of the original Flask-Foundation, but with the following enhancements:
 
 #### Getting Started, assumes fully-stocked virtualenv
 
-`make rename somnewapp=somenewapp`
+`make rename appname=somenewapp`
 
 Alembic initialize
 
