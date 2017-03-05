@@ -1,5 +1,5 @@
-git+https://bitbucket.org/50onred/fifty.git@master#egg=Fifty-Flask
-git+https://bitbucket.org/50onred/fifty-tables.git@1.2.3#egg=Fifty-Tables
+git+https://bitbucket.org/50onred/fifty.git@1.2.5#egg=Fifty-Flask
+git+https://bitbucket.org/50onred/fifty-tables.git@1.7.0#egg=Fifty-Tables
 Flask-Assets==0.11
 Flask-Cache==0.13.1
 Flask-DebugToolbar==0.10.0

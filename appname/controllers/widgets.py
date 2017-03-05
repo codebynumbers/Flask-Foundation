@@ -1,9 +1,9 @@
 from flask import Blueprint, url_for, flash
 from flask_login import current_user
 
-from fifty.flask.views.generic import url_rule, FormView
-from fifty.tables import NumericColumn, LinkColumn
-from fifty.tables.views import SQLAlchemyTableView
+from fifty_flask.views.generic import url_rule, FormView
+from fifty_tables import NumericColumn, LinkColumn
+from fifty_tables.views import SQLAlchemyTableView
 
 from appname.controllers.mixins import WidgetAccessMixin, LoginRequiredMixin
 from appname.forms.widget import WidgetForm

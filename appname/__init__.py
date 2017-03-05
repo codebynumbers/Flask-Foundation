@@ -1,9 +1,9 @@
 #! ../env/bin/python
-from fifty.tables import FiftyTables
+from fifty_tables import FiftyTables
 import os
 import sys
 import logging
-from fifty.flask.app import Flask
+from fifty_flask.app import Flask
 from webassets.loaders import PythonLoader as PythonAssetsLoader
 
 from appname import assets
